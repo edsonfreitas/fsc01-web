@@ -1,5 +1,7 @@
 import { HeartIcon } from '@heroicons/react/outline'
 import { useState } from 'react'
+import axios from 'axios';
+import { useEffect } from 'react';
 
 //Component TweetForm
 /*TweetForm----->*/
@@ -73,13 +75,33 @@ function Tweet({name, username, avatar, children}){
 }//<---Tweet>
 
 export const Home = () => {
+  const [data, setData] = useState([])
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbDN6MTRtY3YwMDAwZDB3MnBoZm10eTUzIiwiaWF0IjoxNjU0NDUyODAwLCJleHAiOjE2NTQ1MzkyMDB9.8JNEE3bQdS3fIQdI0_q66p-OkkXgENpqJIQFHHi3UQw'
+  const loading = true
+
+  async function getData(){
+    const res = await axios.get('http://localhost:9901/tweets',{
+      headers:{
+        'authorization': `Bearer ${token}`
+      }
+    })
+    setData(res.data)
+  }
+
+  useEffect(() => {
+    getData()
+    console.log("Executou!")
+  }, [])
   return (
     <>
       <TweetForm />
       <div>
-       <Tweet name="Edson Arruda" username="@edsonArruda22" avatar ="./images/avatar.svg">
-      Bem vindo ao Tweet!
-       </Tweet>
+        {data.length && data.map(tweet =>(
+          <Tweet name={tweet.user.name} username={tweet.user.username} avatar ="./images/avatar.svg">
+          {tweet.text}
+          </Tweet>
+        ))}
+    
         <Tweet name="Elisângela Maria" username="@elimaria22" avatar ="./images/avatar.svg">
       Olá meu amor, este é um teste
         </Tweet>
