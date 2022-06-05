@@ -74,15 +74,14 @@ function Tweet({name, username, avatar, children}){
   )
 }//<---Tweet>
 
-export const Home = () => {
+export const Home = ({ loggedInUser }) => {
   const [data, setData] = useState([])
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbDN6MTRtY3YwMDAwZDB3MnBoZm10eTUzIiwiaWF0IjoxNjU0NDUyODAwLCJleHAiOjE2NTQ1MzkyMDB9.8JNEE3bQdS3fIQdI0_q66p-OkkXgENpqJIQFHHi3UQw'
   const loading = true
 
   async function getData(){
     const res = await axios.get('http://localhost:9901/tweets',{
       headers:{
-        'authorization': `Bearer ${token}`
+        'authorization': `Bearer ${loggedInUser.accessToken}`
       }
     })
     setData(res.data)
@@ -97,14 +96,11 @@ export const Home = () => {
       <TweetForm />
       <div>
         {data.length && data.map(tweet =>(
-          <Tweet name={tweet.user.name} username={tweet.user.username} avatar ="./images/avatar.svg">
+          <Tweet key={tweet.id} name={tweet.user.name} username={tweet.user.username} avatar ="./images/avatar.svg">
           {tweet.text}
           </Tweet>
         ))}
-    
-        <Tweet name="Elisângela Maria" username="@elimaria22" avatar ="./images/avatar.svg">
-      Olá meu amor, este é um teste
-        </Tweet>
+
       </div>
     </>
   )
