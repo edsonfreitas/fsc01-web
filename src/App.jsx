@@ -11,8 +11,8 @@ export function App(){
         return <Home loggedInUser={user}/>
     }
      return window.location.pathname === '/signup'
-    ? <Signup singInUser={setUser} /> 
+    ? <Signup signInUser={setUser} />
     : <Login signInUser={setUser} />
-    
+
     //return user ? <Home /> : <Login signInUser={setUser} />
 }

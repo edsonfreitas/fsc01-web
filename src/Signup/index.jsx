@@ -21,7 +21,7 @@ export function Signup ({ signInUser }){
           const res = await  axios.post(`${import.meta.env.VITE_API_HOST}/signup`, {
               name: values.name,
               email: values.email,
-              username: values.username, 
+              username: values.username,
               password: values.password
             })
 
@@ -39,10 +39,10 @@ export function Signup ({ signInUser }){
             <h1 className="text-4xl">Crie sua conta</h1>
 
             <form className="space-y-6 " onSubmit={formik.handleSubmit}>
-                
+
                 {/*name-->*/}
                 <div className='space-y-2'>
-                    <Input 
+                    <Input
                     type="text"
                     name='name'
                     placeholder="Nome"
@@ -52,15 +52,15 @@ export function Signup ({ signInUser }){
                     disabled={formik.isSubmitting}
                 />
                 {/*Error no name -->*/}
-                {(formik.touched.name 
-                    && formik.errors.name) 
+                {(formik.touched.name
+                    && formik.errors.name)
                     && <div className='text-red-500 text-sm'>{formik.errors.name}</div>
                 }
-                </div>{/*<--name*/}  
+                </div>{/*<--name*/}
 
                 {/*username-->*/}
                 <div className='space-y-2'>
-                    <Input 
+                    <Input
                     type="text"
                     name='username'
                     placeholder="Nome do usuário"
@@ -70,15 +70,15 @@ export function Signup ({ signInUser }){
                     disabled={formik.isSubmitting}
                 />
                 {/*Error no username -->*/}
-                {(formik.touched.username 
-                    && formik.errors.username) 
+                {(formik.touched.username
+                    && formik.errors.username)
                     && <div className='text-red-500 text-sm'>{formik.errors.username}</div>
                 }
-                </div>{/*<-- username*/} 
+                </div>{/*<-- username*/}
 
                 {/*email-->*/}
                 <div className='space-y-2'>
-                    <Input 
+                    <Input
                     type="text"
                     name='email'
                     placeholder="E-mail"
@@ -88,17 +88,17 @@ export function Signup ({ signInUser }){
                     disabled={formik.isSubmitting}
                 />
                 {/*Error no email -->*/}
-                {(formik.touched.email 
-                    && formik.errors.email) 
+                {(formik.touched.email
+                    && formik.errors.email)
                     && <div className='text-red-500 text-sm'>{formik.errors.email}</div>
                      }
-                </div>{/*<---email*/} 
+                </div>{/*<---email*/}
 
-               {/*password-->*/} 
+               {/*password-->*/}
             <div className='space-y-2'>
-                <Input 
+                <Input
                     type="password"
-                    name='password' 
+                    name='password'
                     placeholder="Senha"
                     value={formik.values.password}
                     onChange={formik.handleChange}
